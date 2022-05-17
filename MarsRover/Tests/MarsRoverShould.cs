@@ -11,17 +11,20 @@ public class MarsRoverShould
     }
 
     [Theory]
-    [InlineData("M","0:1:N")]
-    [InlineData("MM","0:2:N")]
-    public void Move(String command,String expectedResult)
+    [InlineData("M", "0:1:N")]
+    [InlineData("MM", "0:2:N")]
+    [InlineData("MMM", "0:3:N")]
+    public void Move(String command, String expectedResult)
     {
         marsRover.Execute(command).Should().Be(expectedResult);
     }
 
-    [Fact]
-    public void RotateRight()
+    [Theory]
+    [InlineData("R","0:0:E")]
+    [InlineData("RR","0:0:S")]
+    public void RotateRight(string command, string expectedResult)
     {
-        marsRover.Execute("R").Should().Be("0:0:E");
+        marsRover.Execute(command).Should().Be(expectedResult);
     }
 
     [Fact]
@@ -33,14 +36,25 @@ public class MarsRoverShould
 
 public class MarsRover
 {
-    public string Execute(string command)
+    public string Execute(string commands)
     {
-        return command switch
+        int y = 0;
+        foreach (char command in commands)
         {
-            "M" => "0:1:N",
-            "L" => "0:0:W",
-            "R" => "0:0:E",
-            _ => "0:0:N"
-        };
+            switch (command)
+            {
+                case 'M':
+                    y++;
+                    break;
+                case 'L':
+                    return "0:0:W";
+                case 'R':
+                    return "0:0:E";
+                default:
+                    return "0:0:N";
+            }
+        }
+
+        return $"0:{y}:N";
     }
 }
