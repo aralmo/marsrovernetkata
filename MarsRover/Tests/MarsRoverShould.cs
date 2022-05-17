@@ -10,10 +10,11 @@ public class MarsRoverShould
         marsRover.Execute("").Should().Be("0:0:N");
     }
 
-    [Fact]
-    public void Move()
+    [Theory]
+    [InlineData("M","0:1:N")]
+    public void Move(String command,String expectedResult)
     {
-        marsRover.Execute("M").Should().Be("0:1:N");
+        marsRover.Execute(command).Should().Be(expectedResult);
     }
 
     [Fact]
