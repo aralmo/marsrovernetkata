@@ -16,6 +16,7 @@ public class MarsRoverShould
     [InlineData("M", "0:1:N")]
     [InlineData("MM", "0:2:N")]
     [InlineData("MMM", "0:3:N")]
+    [InlineData("MMRRM", "0:1:S")]
     public void MoveOnYAxis(String command, String expectedResult)
     {
         marsRover.Execute(command).Should().Be(expectedResult);
