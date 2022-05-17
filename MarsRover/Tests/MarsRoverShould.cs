@@ -21,6 +21,12 @@ public class MarsRoverShould
     {
         marsRover.Execute("R").Should().Be("0:0:E");
     }
+    
+    [Fact]
+    public void RotateLeft()
+    {
+        marsRover.Execute("L").Should().Be("0:0:W");
+    }
 }
 
 public class MarsRover
@@ -30,6 +36,11 @@ public class MarsRover
         if (command == "M")
         {
             return "0:1:N";
+        }
+
+        if (command == "R")
+        {
+            return "0:0:E";
         }
 
         return "0:0:N";
