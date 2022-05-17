@@ -16,7 +16,14 @@ public class MarsRoverShould
     [InlineData("M", "0:1:N")]
     [InlineData("MM", "0:2:N")]
     [InlineData("MMM", "0:3:N")]
-    public void Move(String command, String expectedResult)
+    public void MoveOnYAxis(String command, String expectedResult)
+    {
+        marsRover.Execute(command).Should().Be(expectedResult);
+    }
+    
+    [Theory]
+    [InlineData("RM", "1:0:E")]
+    public void MoveOnXAxis(String command, String expectedResult)
     {
         marsRover.Execute(command).Should().Be(expectedResult);
     }
@@ -25,6 +32,7 @@ public class MarsRoverShould
     [InlineData("R", "0:0:E")]
     [InlineData("RR", "0:0:S")]
     [InlineData("RRR", "0:0:W")]
+    [InlineData("RRRR", "0:0:N")]
     public void RotateRight(string command, string expectedResult)
     {
         marsRover.Execute(command).Should().Be(expectedResult);
@@ -34,6 +42,7 @@ public class MarsRoverShould
     [InlineData("L", "0:0:W")]
     [InlineData("LL", "0:0:S")]
     [InlineData("LLL", "0:0:E")]
+    [InlineData("LLLL", "0:0:N")]
     public void RotateLeft(string command, string expectedResult)
     {
         marsRover.Execute(command).Should().Be(expectedResult);
