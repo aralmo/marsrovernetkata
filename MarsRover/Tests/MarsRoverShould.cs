@@ -53,7 +53,14 @@ public class MarsRover
                     y++;
                     break;
                 case 'L':
-                    return "0:0:W";
+                    compass = compass switch
+                    {
+                        CompassDirections.N => CompassDirections.W,
+                        CompassDirections.S => CompassDirections.E,
+                        CompassDirections.E => CompassDirections.N,
+                        CompassDirections.W => CompassDirections.S,
+                    };
+                    break;
                 case 'R':
                     compass = compass switch
                     {
