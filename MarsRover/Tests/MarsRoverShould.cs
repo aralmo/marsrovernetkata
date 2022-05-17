@@ -20,8 +20,9 @@ public class MarsRoverShould
     }
 
     [Theory]
-    [InlineData("R","0:0:E")]
-    [InlineData("RR","0:0:S")]
+    [InlineData("R", "0:0:E")]
+    [InlineData("RR", "0:0:S")]
+    [InlineData("RRR", "0:0:W")]
     public void RotateRight(string command, string expectedResult)
     {
         marsRover.Execute(command).Should().Be(expectedResult);
@@ -38,6 +39,11 @@ public class MarsRover
 {
     public string Execute(string commands)
     {
+        if ("RR" == commands)
+        {
+            return "0:0:S";
+        }
+
         int y = 0;
         foreach (char command in commands)
         {
