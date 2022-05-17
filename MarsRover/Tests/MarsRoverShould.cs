@@ -45,6 +45,8 @@ public class MarsRover
         }
 
         int y = 0;
+        CompassDirections compass = CompassDirections.N;
+        
         foreach (char command in commands)
         {
             switch (command)
@@ -55,12 +57,27 @@ public class MarsRover
                 case 'L':
                     return "0:0:W";
                 case 'R':
-                    return "0:0:E";
+                    compass = compass switch
+                    {
+                        CompassDirections.N => CompassDirections.E,
+                        CompassDirections.S => CompassDirections.W,
+                        CompassDirections.E => CompassDirections.S,
+                        CompassDirections.W => CompassDirections.N,
+                    };
+                    break;
                 default:
                     return "0:0:N";
             }
         }
 
-        return $"0:{y}:N";
+        return $"0:{y}:{compass}";
+    }
+
+    private enum CompassDirections
+    {
+        N,
+        S,
+        E,
+        W
     }
 }
