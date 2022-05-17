@@ -29,9 +29,9 @@ public class MarsRoverShould
     }
 
     [Theory]
-    [InlineData("L","0:0:W")]
-    [InlineData("LL","0:0:S")]
-    [InlineData("LLL","0:0:E")]
+    [InlineData("L", "0:0:W")]
+    [InlineData("LL", "0:0:S")]
+    [InlineData("LLL", "0:0:E")]
     public void RotateLeft(string command, string expectedResult)
     {
         marsRover.Execute(command).Should().Be(expectedResult);
@@ -44,7 +44,7 @@ public class MarsRover
     {
         int y = 0;
         CompassDirections compass = CompassDirections.N;
-        
+
         foreach (char command in commands)
         {
             switch (command)
@@ -53,22 +53,10 @@ public class MarsRover
                     y++;
                     break;
                 case 'L':
-                    compass = compass switch
-                    {
-                        CompassDirections.N => CompassDirections.W,
-                        CompassDirections.S => CompassDirections.E,
-                        CompassDirections.E => CompassDirections.N,
-                        CompassDirections.W => CompassDirections.S,
-                    };
+                    compass = compass.ToLeft();
                     break;
                 case 'R':
-                    compass = compass switch
-                    {
-                        CompassDirections.N => CompassDirections.E,
-                        CompassDirections.S => CompassDirections.W,
-                        CompassDirections.E => CompassDirections.S,
-                        CompassDirections.W => CompassDirections.N,
-                    };
+                    compass = compass.ToRight();
                     break;
                 default:
                     return "0:0:N";
@@ -77,12 +65,37 @@ public class MarsRover
 
         return $"0:{y}:{compass}";
     }
+}
 
-    private enum CompassDirections
+public static class CompassDirectionsExtensions
+{
+    public static CompassDirections ToRight(this CompassDirections current)
     {
-        N,
-        S,
-        E,
-        W
+        return current switch
+        {
+            CompassDirections.N => CompassDirections.E,
+            CompassDirections.S => CompassDirections.W,
+            CompassDirections.E => CompassDirections.S,
+            CompassDirections.W => CompassDirections.N,
+        };
     }
+
+    public static CompassDirections ToLeft(this CompassDirections current)
+    {
+        return current switch
+        {
+            CompassDirections.N => CompassDirections.W,
+            CompassDirections.S => CompassDirections.E,
+            CompassDirections.E => CompassDirections.N,
+            CompassDirections.W => CompassDirections.S,
+        };
+    }
+}
+
+public enum CompassDirections
+{
+    N,
+    S,
+    E,
+    W
 }
