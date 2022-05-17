@@ -1,3 +1,5 @@
+using static MarsRover.Tests.CompassDirections;
+
 namespace MarsRover.Tests;
 
 public class MarsRoverShould
@@ -43,7 +45,7 @@ public class MarsRover
     public string Execute(string commands)
     {
         int y = 0;
-        CompassDirections compass = CompassDirections.N;
+        CompassDirections compass = N;
 
         foreach (char command in commands)
         {
@@ -73,10 +75,10 @@ public static class CompassDirectionsExtensions
     {
         return current switch
         {
-            CompassDirections.N => CompassDirections.E,
-            CompassDirections.S => CompassDirections.W,
-            CompassDirections.E => CompassDirections.S,
-            CompassDirections.W => CompassDirections.N,
+            N => E,
+            S => W,
+            E => S,
+            W => N,
         };
     }
 
@@ -84,10 +86,10 @@ public static class CompassDirectionsExtensions
     {
         return current switch
         {
-            CompassDirections.N => CompassDirections.W,
-            CompassDirections.S => CompassDirections.E,
-            CompassDirections.E => CompassDirections.N,
-            CompassDirections.W => CompassDirections.S,
+            N => W,
+            S => E,
+            E => N,
+            W => S,
         };
     }
 }
