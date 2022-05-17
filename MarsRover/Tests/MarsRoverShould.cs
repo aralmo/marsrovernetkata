@@ -28,10 +28,13 @@ public class MarsRoverShould
         marsRover.Execute(command).Should().Be(expectedResult);
     }
 
-    [Fact]
-    public void RotateLeft()
+    [Theory]
+    [InlineData("L","0:0:W")]
+    [InlineData("LL","0:0:S")]
+    [InlineData("LLL","0:0:E")]
+    public void RotateLeft(string command, string expectedResult)
     {
-        marsRover.Execute("L").Should().Be("0:0:W");
+        marsRover.Execute(command).Should().Be(expectedResult);
     }
 }
 
@@ -39,11 +42,6 @@ public class MarsRover
 {
     public string Execute(string commands)
     {
-        if ("RR" == commands)
-        {
-            return "0:0:S";
-        }
-
         int y = 0;
         CompassDirections compass = CompassDirections.N;
         
