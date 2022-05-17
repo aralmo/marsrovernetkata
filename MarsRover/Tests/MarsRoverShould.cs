@@ -64,14 +64,13 @@ public class MarsRover
             switch (command)
             {
                 case 'M':
-                    if (compass == N)
-                        y++;
-
-                    else if (compass == S)
+                    y = compass switch
                     {
-                        y--;
-                    }
-                    else
+                        S => y - 1,
+                        N => y + 1,
+                        _ => y
+                    };
+                    if (compass == E)
                     {
                         x++;
                     }
