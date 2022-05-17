@@ -54,6 +54,8 @@ public class MarsRover
     public string Execute(string commands)
     {
         int y = 0;
+        int x = 0;
+        
         CompassDirections compass = N;
 
         foreach (char command in commands)
@@ -61,7 +63,10 @@ public class MarsRover
             switch (command)
             {
                 case 'M':
-                    y++;
+                    if (compass == N)
+                        y++;
+                    else
+                        x++;
                     break;
                 case 'L':
                     compass = compass.ToLeft();
@@ -74,7 +79,7 @@ public class MarsRover
             }
         }
 
-        return $"0:{y}:{compass}";
+        return $"{x}:{y}:{compass}";
     }
 }
 
