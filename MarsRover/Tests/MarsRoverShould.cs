@@ -24,6 +24,7 @@ public class MarsRoverShould
 
     [Theory]
     [InlineData("RM", "1:0:E")]
+    [InlineData("RMRRM", "0:0:W")]
     public void MoveOnXAxis(String command, String expectedResult)
     {
         marsRover.Execute(command).Should().Be(expectedResult);
