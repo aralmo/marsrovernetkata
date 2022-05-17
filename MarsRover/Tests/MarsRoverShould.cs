@@ -21,7 +21,7 @@ public class MarsRoverShould
     {
         marsRover.Execute(command).Should().Be(expectedResult);
     }
-    
+
     [Theory]
     [InlineData("RM", "1:0:E")]
     public void MoveOnXAxis(String command, String expectedResult)
@@ -56,7 +56,7 @@ public class MarsRover
     {
         int y = 0;
         int x = 0;
-        
+
         CompassDirections compass = N;
 
         foreach (char command in commands)
@@ -66,8 +66,16 @@ public class MarsRover
                 case 'M':
                     if (compass == N)
                         y++;
+
+                    else if (compass == S)
+                    {
+                        y--;
+                    }
                     else
+                    {
                         x++;
+                    }
+
                     break;
                 case 'L':
                     compass = compass.ToLeft();
