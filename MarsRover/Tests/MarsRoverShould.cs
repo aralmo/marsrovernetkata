@@ -12,6 +12,7 @@ public class MarsRoverShould
 
     [Theory]
     [InlineData("M","0:1:N")]
+    [InlineData("MM","0:2:N")]
     public void Move(String command,String expectedResult)
     {
         marsRover.Execute(command).Should().Be(expectedResult);
